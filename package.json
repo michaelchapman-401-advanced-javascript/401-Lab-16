@@ -4,7 +4,9 @@
   "description": "Events Lab",
   "main": "app.js",
   "scripts": {
-    "test": "jest --verbose --coverage"
+    "test": "jest --verbose --coverage",
+    "lint": "eslint --fix \"**/*.js\"",
+    "jsdoc": "jsdoc -c ./docs/config/jsdoc.config.json ."
   },
   "author": "",
   "license": "MIT",
