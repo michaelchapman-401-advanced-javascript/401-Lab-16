@@ -13,9 +13,9 @@ const alterFile = (file) => {
 };
 
 function readFile(file) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     fs.readFile( file, (err, data) => {
-      if(err) { reject(err); }
+      if(err) { events.emit('error', err); }
       resolve(data.toString());
     });
   });
