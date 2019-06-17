@@ -4,9 +4,8 @@ const fs = require('fs');
 
 const alterFile = (file) => {
   readFile(file)
-    .then(text => {
-      console.log(text);
-      writeFile(text);
+    .then(data => {
+      writeFile(file, caps(data));
     });
 };
 
@@ -14,12 +13,16 @@ function readFile(file) {
   return new Promise((resolve, reject) => {
     fs.readFile( file, (err, data) => {
       if(err) { reject(err); }
-      resolve(data.toString().toUpperCase());
+      resolve(data.toString());
     });
   });
 }
 
-function writeFile(text) {
+let caps = (data) => {
+  return data.toUpperCase();
+};
+
+function writeFile(file, text) {
   return new Promise((resolve, reject) => {
     fs.writeFile( file, Buffer.from(text), (err, data) => {
       if(err) { reject(err); }
