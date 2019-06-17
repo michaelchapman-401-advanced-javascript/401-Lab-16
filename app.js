@@ -26,13 +26,19 @@ let caps = (data) => {
 };
 
 function writeFile(file, text) {
-  return new Promise((resolve, reject) => {
-    fs.writeFile( file, Buffer.from(text), (err, data) => {
-      if(err) { reject(err); }
-      events.emit('log', file);
+  return new Promise((resolve) => {
+    fs.writeFile( file, Buffer.from(text), (err) => {
+      if(err) { events.emit('error', err); }
+      resolve(events.emit('log', file));
     });
   });
 }
+
+function handleError(err) {
+  throw err;
+}
+
+events.on('error', handleError);
 
 let file = process.argv.slice(2).shift();
 alterFile(file);
